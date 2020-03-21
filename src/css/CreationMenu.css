@@ -1,0 +1,35 @@
+.creation-menu-container{
+    position: relative;
+    display: inline-block;
+}
+
+.creation-menu-btn{
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #42a5f5;
+    color: white;
+    font-size: 20px;
+}
+
+.creation-menu-content{
+    display: none;
+    position: absolute;
+    background-color: #42a5f5;
+    min-width: 160px;
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.creation-menu-content a {
+    color: white;
+    padding: 5px 7px;
+    text-decoration: none;
+    display: block;
+}
+
+.creation-menu-content a:hover {background-color: #bdbdbd;}
+
+.creation-menu-container:hover .creation-menu-content {display: block;}
+
+.creation-menu-container:hover .creation-menu-btn {background-color: #1e88e5;}

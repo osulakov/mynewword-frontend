@@ -1,0 +1,15 @@
+.re-enter-password-not-matched-label{
+    color: red;
+}
+
+.re-enter-password-matched-label{
+    color: green;
+}
+
+.re-enter-password-not-matched{
+    border: 1px solid red;
+}
+
+.re-enter-password-matched{
+    border: none;
+}
