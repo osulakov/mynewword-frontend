@@ -1,3 +1,14 @@
+.topic-list{
+    margin-top: 10px;
+}
+
 .topic-list-table-header{
     color: grey;
+}
+
+.topic-list-container{
+    padding: 5px;
+    margin-top: 15px;
+    background-color: rgb(248, 244, 238);
+    box-shadow: 1px 1px 5px  grey;
 }

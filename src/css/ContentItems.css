@@ -1,0 +1,16 @@
+.youtube-video-item-box{
+    margin-top: 7px;
+    border: 1px solid gray;
+}
+
+.youtube-video-item-button{
+    margin: 0px;
+    text-align: center;
+    background-color: #42a5f5;
+    color: white;
+    cursor: pointer;
+}
+
+.youtube-video-item-button:hover{
+    background-color: #1976d2;
+}

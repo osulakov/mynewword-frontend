@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Cell } from 'styled-css-grid';
 
-import '../main.css';
+import '../Main.css';
 
 import CreationMenu from './one-word/CreationMenu';
 import NewContentItem from './one-word/NewContentItem';
@@ -15,18 +15,18 @@ import YouTubeVideo from './one-word/YoutubeVideo';
 
 class OneWord extends Component {
 
-    state = {
-        word: {
-            wordName: 'Apple',
-            tags: ['fruit', 'green', 'red', 'circle', 'tasty', 'applejuice', 'iloveapples', 'apples', 'loveapples'],
-            likes: 126,
-            topics: ['Fruit', 'Plants', 'Food'],
-            contentOrder: [
-                {id: '16', type: 'descriptionNote', title: 'Apples',  content: 'Very tasty fruit'}
-            ],
-            isPrivate: false
-        }
-    }
+    // state = {
+    //     word: {
+    //         wordName: 'Apple',
+    //         tags: ['fruit', 'green', 'red', 'circle', 'tasty', 'applejuice', 'iloveapples', 'apples', 'loveapples'],
+    //         likes: 126,
+    //         topics: ['Fruit', 'Plants', 'Food'],
+    //         contentOrder: [
+    //             {id: '16', type: 'descriptionNote', title: 'Apples',  content: 'Very tasty fruit'}
+    //         ],
+    //         isPrivate: false
+    //     }
+    // }
 
     _onReady(e){
         e.target.pauseVideo();
@@ -36,18 +36,24 @@ class OneWord extends Component {
         let newSubTitle = {
             content: 'Suggested Images from Pixabay'
         }
-        let word = this.props.word
+        let word = this.props.word;
+        console.log(word)
         let contentOrderList;
         if(word.contentOrder) {
             contentOrderList = word.contentOrder.map((item, index) => {
                 switch(item.type) {
                     case 'subTitle':
                         return (
-                            <Cell key={item.id} width={12}><SubTitle data={ item }/></Cell>
+                            <div key={item.id} className='col s8 m5 l6'>
+                                <SubTitle data={ item }/>
+                            </div>
+                            
                         )
                     case 'descriptionNote':
                         return (
-                            <Cell key={item.id} width={6}><DescriptionNote data={ item } /></Cell>
+                            <div key={item.id} className='col s8 m5 l6'>
+                                <DescriptionNote data={ item } />
+                            </div>
                         )
                     case 'urlLink':
                         return (
@@ -55,7 +61,9 @@ class OneWord extends Component {
                         )
                     case 'youtubeVideo':
                         return (
-                            <Cell width={4}><YouTubeVideo urlLink={ item.content }/></Cell>
+                            <div key={item.id} className='col s4 offset-s0 m3 l3'>
+                                <YouTubeVideo urlLink={ item.content }/>
+                            </div>
                         )
                     case 'translation':
                         return (
@@ -90,21 +98,25 @@ class OneWord extends Component {
                         )
                 }
             })
-            console.log('OneWord', word.contentOrder)
         }
         return (
-            <div className='one-word-component-main-container'>
-                <Grid columns={12}>
-                    <Cell width={12}><General word={word}/></Cell>
-                    {this.props.isOpen ? (
-                        <Cell width={12}><NewContentItem/></Cell>
-                    ):(
-                        <> </>
-                    )}
-                    { contentOrderList }
-                    <Cell width={12}><CreationMenu/></Cell>
-                </Grid>
+            <div className='row'>
+                <div className='col s8 m10 l12'>
+                    <div className='one-word-component-main-container'>
+                        <General word={word}/>
+                        {this.props.isOpen ? (
+                            <NewContentItem/>
+                        ):(
+                            <> </>
+                        )}
+                        <CreationMenu/>
+                        <div className='row'>
+                            { contentOrderList }   
+                        </div>
+                    </div>
+                </div>
             </div>
+            
         ) 
     }
 }
@@ -123,42 +135,6 @@ const MapDispatchToProps = (dispatch) => {
 }
 
 export default connect(MapStateToProps, MapDispatchToProps)(OneWord);
-
-
-// <Grid columns={12}>
-            //         <Cell width={12}><General word={word}/></Cell> 
-            //         <Cell width={12}><SubTitle subTitle={ word.contentOrder[0] }/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //         <Cell width={12}><SubTitle subTitle={ word.contentOrder[17] }/></Cell>
-            //         <Cell width={4}><YouTubeVideo id='-N8ssJQapUk'/></Cell>
-            //         <Cell width={4}><YouTubeVideo id='Ff1ecYv24-E'/></Cell>
-            //         <Cell width={4}><YouTubeVideo id='rpNQJTKgZKs'/></Cell>
-            //         <Cell width={12}><SubTitle subTitle={ word.contentOrder[18] }/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //         <Cell width={12}><SubTitle subTitle={ word.contentOrder[17] }/></Cell>
-            //         <Cell width={4}><YouTubeVideo id='-N8ssJQapUk'/></Cell>
-            //         <Cell width={4}><YouTubeVideo id='Ff1ecYv24-E'/></Cell>
-            //         <Cell width={4}><YouTubeVideo id='rpNQJTKgZKs'/></Cell>
-            //         <Cell width={12}><SubTitle subTitle={ word.contentOrder[18] }/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[7]}/></Cell>
-            //         <Cell width={6}><DescriptionNote note={word.contentOrder[6]}/></Cell>
-            //     </Grid>
 
 // {id: '30', type: 'suggestedImages'},
 //                 {id: '1', type: 'subTitle', content: 'Main info'},

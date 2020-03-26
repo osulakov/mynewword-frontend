@@ -58,7 +58,7 @@ class NewContentItem extends Component {
         
         if(item.type === 'subTitle') {
             return (
-                <div className='new-content-item-modal'>
+                <div className='new-content-item-box'>
                     <button className='new-content-item-cancel-button' onClick={this.cancel}>X</button>
                     <p>Create new SubTitle</p>
                     <input 
@@ -73,7 +73,7 @@ class NewContentItem extends Component {
             )
         } else if(item.type === 'descriptionNote') {
             return (
-                <div className='new-content-item-modal'>
+                <div className='new-content-item-box'>
                     <button className='new-content-item-cancel-button' onClick={this.cancel}>X</button>
                     <p>Create new Description Note</p>
                     <input 
@@ -95,9 +95,25 @@ class NewContentItem extends Component {
                     <button className='new-content-item-save-button' onClick={this.save}>ADD</button>
                 </div>
             )
+        } else if(item.type === 'youtubeVideo') {
+            return (
+                <div className='new-content-item-box'>
+                    <button className='new-content-item-cancel-button' onClick={this.cancel}>X</button>
+                    <p>Add new Youtube Video</p>
+                    <input 
+                        id='content' 
+                        type='text' 
+                        placeholder='Enter Youtube link here and press Save' 
+                        onChange={this.changeContent}
+                        value={this.state.content}
+                    />
+                    <button className='new-content-item-save-button' onClick={this.save}>ADD</button>
+                </div>
+            )
         } else {
             return (
-                <></>
+                <>
+                </>
             )
         }
     }

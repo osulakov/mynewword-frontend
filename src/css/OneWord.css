@@ -1,3 +1,44 @@
 .add-new-tag-button{
     border-radius: 50%;
 }
+
+.one-word-general-info-box{
+    background-color: grey;
+    text-align: left;
+    color: white;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    padding: 4px;
+}
+
+.one-word-likes-box{
+    padding: 5px;
+    border: 1px solid grey;
+    border-radius: 3px;
+}
+
+.one-word-likes-heart-i-liked{
+    color: red;
+    text-align: right;
+}
+
+.one-word-likes-heart{
+    color: grey;
+    text-align: right;
+}
+
+.one-word-is-private-box{
+    padding: 5px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    color: #0288d1;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+.one-word-short-description-box{
+    padding: 3px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    color:#1976d2;
+}

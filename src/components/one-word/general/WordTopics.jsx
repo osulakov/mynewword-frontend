@@ -14,7 +14,7 @@ class WordTopics extends Component {
         if(topics !== undefined && topics.length > 0) {
             topicsList = topics.map((topic, index) => {
                 return (
-                    <Cell key={index} width={1}> 
+                    <Cell key={index}> 
                         <Topic topic={topic}/>
                     </Cell>
                 )
@@ -24,7 +24,7 @@ class WordTopics extends Component {
         return (
             <div style={styles}>
                 <div style={{color: 'grey'}}><b>Topics</b></div>
-                <Grid columns={4}>{topicsList}</Grid>
+                <Grid columns='repeat(auto-fit,minmax(120px,1fr))'>{topicsList}</Grid>
             </div>
         )
     }

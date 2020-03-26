@@ -5,7 +5,18 @@ import { HOST_URL } from '../constants';
 import { updateWord } from '../actions/wordActions';
 
 export const getAllTopics = () => (dispatch) => {
-    getTopics()
+    let token = localStorage.getItem('token');
+    token = `Bearer ${token}`;
+    const headers = {
+        'Content-Type': 'application/json',
+    }
+    headers["Authorization"] = token;
+    axios({
+        method: 'GET',
+        url: `${HOST_URL}/topic/`,
+        headers: headers
+    })
+    
     .then(result => {
         let topics = result.data.topics;
         
@@ -16,6 +27,19 @@ export const getAllTopics = () => (dispatch) => {
     })
     
 }
+
+// export const getAllTopics = () => (dispatch) => {
+//     getTopics()
+//     .then(result => {
+//         let topics = result.data.topics;
+        
+//         dispatch({type: 'GET_ALL_TOPICS', payload: topics})
+//     })
+//     .catch(err => {
+//         console.log(err)
+//     })
+    
+// }
 
 function getTopics () {
     let token = localStorage.getItem('token');
@@ -34,13 +58,14 @@ function getTopics () {
 export const createTopic = (topicName, topicsForFutureWord) => (dispatch) => {
     console.log('actions try to create topic', topicName)
     createTop(topicName)
-    .then(result => {
+    .then((result) => {
         
         let topic = result.data.topic;
         console.log('topic is created', topic)
-        topicsForFutureWord.push(topic)
+        topicsForFutureWord = [...topicsForFutureWord, topic]
         
         dispatch({type: 'TOPICS_FOR_FUTURE_WORD', payload: topicsForFutureWord})
+        
     })
     .catch(err => {
         console.log(err)

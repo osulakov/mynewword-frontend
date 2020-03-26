@@ -18,13 +18,17 @@ class MainContent extends Component {
     }
 
     render() {
-        this.props.setCurrentTopic('')
+        //this.props.setCurrentTopic('')
         return (
-            <Grid columns={3} style={{marginTop: '20px'}}>
-                <Cell width={2}>
-                    <WordList words={this.props.words} chooseOneWord={this.chooseOneWord}/>
-                </Cell>
-            </Grid>
+            <div style={{marginTop: '20px'}}>
+                <WordList words={this.props.words} chooseOneWord={this.chooseOneWord}/>
+            </div>
+            
+            // <Grid columns={3} style={{marginTop: '20px'}}>
+            //     <Cell width={2}>
+                    
+            //     </Cell>
+            // </Grid>
         )
     }
 }

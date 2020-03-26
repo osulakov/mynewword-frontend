@@ -10,6 +10,8 @@ import Connections from './components/Connections';
 import Auth from './components/Auth';
 import Account from './components/Account';
 
+import './Main.css';
+
 function App() {
   return (
     <Router>

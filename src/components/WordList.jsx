@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Grid, Cell } from 'styled-css-grid';
+//import { Grid, Cell } from 'styled-css-grid';
 
 import { changeDeleteMode } from '../actions/mainActions';
 import { getAllWords } from '../actions/wordActions';
@@ -22,7 +22,7 @@ class WordList extends Component {
     }
 
     componentDidMount() {
-        // this.props.getAllWords();
+        this.props.getAllWords();
     }
 
     reloadData = () => {
@@ -141,19 +141,19 @@ class WordList extends Component {
                         <tbody>
                             {words.map((word) => {
                                 let id = word._id
-                                return (
-                                    <>
-                                    {this.props.deleteMode ? (
+                                if(this.props.deleteMode){
+                                    return (
                                         <tr key={id}>
                                             <WordsListCell word={word}/>
                                         </tr>
-                                    ):(
+                                    )
+                                }else {
+                                    return (
                                         <tr key={id} onClick={() => {this.clickWord(id)}}>
                                             <WordsListCell word={word}/>
                                         </tr>
-                                    )}
-                                    </>   
-                                )   
+                                    )
+                                }
                             })}
                         </tbody>
                     </table>   
@@ -168,26 +168,29 @@ class WordList extends Component {
 
         return (
             
-            <>
-            {this.props.currentTopic ? (
-                <p><b>Words for topic: &nbsp;</b>{this.props.currentTopic}</p>
-            ):(
-                <>
-                </>
-            )}
-            <WordListTool 
-                    dayFilter={this.dayFilter} 
-                    weekFilter={this.weekFilter} 
-                    monthFilter={this.monthFilter} 
-                    allFilter={this.allFilter}
-                    sortingSwitcher={this.sortingSwitcher} 
-                    sortingMode={this.state.sortingMode}
-                    filterMode={this.state.filterMode}
-            />
-            <Search onChangeSearch={this.onChangeSearch}/>
-            { wordsList }
-            </>
-                
+            <div className='row'>
+                <div className='col s7 m8 l8'>
+                    <div className='words-list'>
+                        {this.props.currentTopic ? (
+                            <p><b>Words for topic: &nbsp;</b>{this.props.currentTopic}</p>
+                        ):(
+                            <>
+                            </>
+                        )}
+                        <WordListTool 
+                                dayFilter={this.dayFilter} 
+                                weekFilter={this.weekFilter} 
+                                monthFilter={this.monthFilter} 
+                                allFilter={this.allFilter}
+                                sortingSwitcher={this.sortingSwitcher} 
+                                sortingMode={this.state.sortingMode}
+                                filterMode={this.state.filterMode}
+                        />
+                        <Search onChangeSearch={this.onChangeSearch}/>
+                        { wordsList }
+                    </div>
+                </div>
+            </div>
         )
     }
 }

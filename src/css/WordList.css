@@ -2,6 +2,8 @@
     
 }
 
-.word-list{
-    
+.words-list{
+    background-color: rgb(248, 244, 238);
+    box-shadow: 1px 1px 5px  grey;
+    padding: 5px;
 }

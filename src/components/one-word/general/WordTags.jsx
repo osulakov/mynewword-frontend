@@ -55,7 +55,7 @@ class WordTags extends Component {
         return (
             <div style={styles}>
                 <div style={{color: 'grey'}}><b>Tags</b></div>
-                <Grid columns={7}>
+                <Grid columns='repeat(auto-fit,minmax(120px,1fr))'>
                     {tagsList}
                     {this.props.justCreatingWordMode ? (
                         <>
@@ -63,7 +63,7 @@ class WordTags extends Component {
                     ):(
                         <>
                         {this.state.addNewMode ? (
-                            <Cell width={1}>
+                            <Cell>
                                 <input 
                                     id='add-tag' 
                                     type='text' 
@@ -74,7 +74,7 @@ class WordTags extends Component {
                                 />
                             </Cell>
                         ):(
-                            <Cell width={1}>
+                            <Cell s>
                                 <button className='add-new-tag-button' onClick={this.handleInputTag}>+</button>
                             </Cell>
                         )}

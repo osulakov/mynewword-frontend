@@ -14,12 +14,9 @@ class TopicList extends Component {
 
     componentDidMount() {
         this.props.getAllTopics()
-        console.log(this.props.topics)
     }
 
     chooseOneTopic = (topic) => {
-        //should appear Words List for one topic
-        console.log('choose one topic', topic._id)
         this.props.setCurrentTopic(topic.topicName);
         this.props.getWordsForOneTopic(topic._id);
     }
@@ -43,14 +40,14 @@ class TopicList extends Component {
 
         return (
             <Grid columns={12}>
-                <Cell width={4}>
+                <Cell width={4} className='topic-list-container'>
                     <table className='highlight'>
                         <thead>
                             <tr className='topic-list-table-header'>
                                 <td>
-                                    <Grid columns={5}>
+                                    <Grid columns={3}>
                                         <Cell width={3}>Topic Name</Cell>
-                                        <Cell width={2}>Words</Cell>
+                                        {/* <Cell width={2}>Words</Cell> */}
                                     </Grid>
                                 </td>
                             </tr>

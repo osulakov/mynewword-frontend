@@ -1,22 +1,23 @@
 import React from 'react';
 import YouTube from 'react-youtube';
+import { Grid, Cell } from 'styled-css-grid';
 
 const YoutubeVideo = (props) => {
-    const opts = {
-        height: '150px',
-        width: '270px'
-    }
-    let buttonStyle = {
-        backgroundColor: '#bbdefb',
-        color: 'white',
-        borderRadius: '2px'
+    let opts = {
+        width: '100%',
+        height: '100%'
     }
     let videoId = props.urlLink.split('=')[1]
     return (
-        <>
-            <YouTube videoId={videoId} opts={opts}/>
-            <button style={buttonStyle}>Delete</button>
-        </>
+        <div className='youtube-video-item-box'>
+            <div>
+                <YouTube videoId={videoId} opts={opts}/>
+            </div>
+            <Grid columns={2} columnGap={0}>
+                <Cell className='youtube-video-item-button' width={1}>Watch</Cell>
+                <Cell className='youtube-video-item-button' width={1}>Delete</Cell>
+            </Grid>
+        </div>
     )
 } 
 

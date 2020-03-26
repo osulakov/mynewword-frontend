@@ -1,12 +1,21 @@
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
 
 import { HOST_URL } from '../constants';
 
 export const getAllWords = () => (dispatch) => {
     var token = localStorage.getItem('token');
         if(token){
-            getWords()
+            let token = localStorage.getItem('token');
+            token = `Bearer ${token}`;
+            const headers = {
+                'Content-Type': 'application/json',
+            }
+            headers["Authorization"] = token;
+            axios({
+                method: 'GET',
+                url: `${HOST_URL}/word/`,
+                headers: headers
+            })
             .then(docs => {
                 console.log(docs.data.words)
                 dispatch({type: 'GET_ALL_WORDS', payload: [...docs.data.words]})
@@ -17,6 +26,21 @@ export const getAllWords = () => (dispatch) => {
         }
     
 }
+
+// export const getAllWords = () => (dispatch) => {
+//     var token = localStorage.getItem('token');
+//         if(token){
+//             getWords()
+//             .then(docs => {
+//                 console.log(docs.data.words)
+//                 dispatch({type: 'GET_ALL_WORDS', payload: [...docs.data.words]})
+//             })
+//             .catch(err => {
+//                 console.log(err)
+//             })
+//         }
+    
+// }
 
 function getWords () {
 
@@ -63,6 +87,7 @@ function createWord (word) {
         tags: word.tags,
         isPrivate: word.isPrivate,
         topics: word.topics,
+        shortDescription: word.shortDescription,
         contentOrder: []
     }
     
@@ -99,6 +124,7 @@ function updateW (word) {
         { "propName": "likes", "value": word.likes},
         { "propName": "isPrivate", "value": word.isPrivate},
         { "propName": "topics", "value": word.topics},
+        {"propName" : "shortDescription", "value": word.shortDescription},
         { "propName": "contentOrder", "value": word.contentOrder}
     ]
     
@@ -165,7 +191,7 @@ export const deleteTopicFromWord = (word, topicId) => (dispatch) => {
 }
 
 export const createNewTag = (tag, tagsForFutureWord) => dispatch => {
-    tagsForFutureWord.push(tag);
+    tagsForFutureWord = [...tagsForFutureWord, tag];
     dispatch({type: 'TAGS_FOR_FUTURE_WORD', payload: tagsForFutureWord})
 }
 
@@ -189,9 +215,6 @@ export const deleteTagFromWord = (word, tag) => (dispatch) => {
 }
 
 export const deleteWord = (id) => (dispatch) => {
-    console.log('delete word action', id)
-    //needs to use API to delete the word.
-    //after this - should get all words again and to change wordsList  -------------------------
     deleteW(id)
     .then(docs => {
         dispatch({type: 'GET_ALL_WORDS', payload: [...docs.data.words]})

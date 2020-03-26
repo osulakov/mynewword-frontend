@@ -13,7 +13,7 @@ const DayButton = styled.div`
     background: ${props => (props.filterMode === 'day' ? '#bdbdbd' : 'grey')};
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 4px;
     margin: auto;
     border-radius: 2px;
     cursor: pointer;
@@ -22,7 +22,7 @@ const WeekButton = styled.div`
     background: ${props => (props.filterMode === 'week' ? '#bdbdbd' : 'grey')};
     color: white;  
     text-align: center;
-    padding: 10px;
+    padding: 4px;
     margin: auto;
     border-radius: 2px;
     cursor: pointer;
@@ -31,7 +31,7 @@ const MonthButton = styled.div`
     background: ${props => (props.filterMode === 'month' ? '#bdbdbd' : 'grey')};
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 4px;
     margin: auto;
     border-radius: 2px;
     cursor: pointer;
@@ -40,7 +40,7 @@ const AllButton = styled.div`
     background: ${props => (props.filterMode === 'all' ? '#bdbdbd' : 'grey')};
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 4px;
     margin: auto;
     border-radius: 2px;
     cursor: pointer;
@@ -50,7 +50,7 @@ const SortingButton = styled.div`
     background: grey;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 4px;
     margin: auto;
     border-radius: 2px;
     cursor: pointer;
@@ -60,7 +60,7 @@ const DeleteModeButton = styled.div`
     background: ${props => (props.deleteMode ? 'red' : 'grey')};
     color: white;
     text-align: center;
-    padding: 5px;
+    padding: 1px;
     margin: auto;
     border-radius: 2px;
     cursor: pointer;
@@ -68,34 +68,34 @@ const DeleteModeButton = styled.div`
 
 const WordListTool = (props) => {
     return (
-        <Grid columns={18}>
-            <Cell width={3}>
+        <div className='row'>
+            <div className='col s2'>
                 <DayButton onClick={props.dayFilter} filterMode={props.filterMode}>Day</DayButton>
-            </Cell>
-            <Cell width={3}>
+            </div>
+            <div className='col s2'>
                 <WeekButton onClick={props.weekFilter} filterMode={props.filterMode}>Week</WeekButton>
-            </Cell>
-            <Cell width={3}>
+            </div>
+            <div className='col s2'>
                 <MonthButton onClick={props.monthFilter} filterMode={props.filterMode}>Month</MonthButton>
-            </Cell>
-            <Cell width={3}>
+            </div>
+            <div className='col s2'>
                 <AllButton onClick={props.allFilter} filterMode={props.filterMode}>All</AllButton>
-            </Cell>
-            <Cell width={3}>
+            </div>
+            <div className='col s2'>
                 {props.sortingMode 
                     ? <SortingButton onClick={props.sortingSwitcher}>&#8595;</SortingButton>
                     : <SortingButton onClick={props.sortingSwitcher}>&#8593;</SortingButton>
                 }
-            </Cell>
-            <Cell width={3}>
+            </div>
+            <div className='col s2'>
                 <DeleteModeButton 
                     onClick={() => {props.changeDeleteMode(props.deleteMode)}}
                     deleteMode={props.deleteMode}
                 >
                    <img src={TrashCanImg} width='25' height='25' color='white'/>
                 </DeleteModeButton>
-            </Cell>
-        </Grid>
+            </div>
+        </div>
     )
 }
 
@@ -137,3 +137,34 @@ export default connect(MapStateToProps, MapDispatchToProps)(WordListTool);
                 </tbody>
             </table> 
         </div> */}
+
+
+
+        // <Grid columns={18}>
+        //     <Cell width={3}>
+        //         <DayButton onClick={props.dayFilter} filterMode={props.filterMode}>Day</DayButton>
+        //     </Cell>
+        //     <Cell width={3}>
+        //         <WeekButton onClick={props.weekFilter} filterMode={props.filterMode}>Week</WeekButton>
+        //     </Cell>
+        //     <Cell width={3}>
+        //         <MonthButton onClick={props.monthFilter} filterMode={props.filterMode}>Month</MonthButton>
+        //     </Cell>
+        //     <Cell width={3}>
+        //         <AllButton onClick={props.allFilter} filterMode={props.filterMode}>All</AllButton>
+        //     </Cell>
+        //     <Cell width={3}>
+        //         {props.sortingMode 
+        //             ? <SortingButton onClick={props.sortingSwitcher}>&#8595;</SortingButton>
+        //             : <SortingButton onClick={props.sortingSwitcher}>&#8593;</SortingButton>
+        //         }
+        //     </Cell>
+        //     <Cell width={3}>
+        //         <DeleteModeButton 
+        //             onClick={() => {props.changeDeleteMode(props.deleteMode)}}
+        //             deleteMode={props.deleteMode}
+        //         >
+        //            <img src={TrashCanImg} width='25' height='25' color='white'/>
+        //         </DeleteModeButton>
+        //     </Cell>
+        // </Grid>

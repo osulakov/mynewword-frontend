@@ -10,13 +10,13 @@ const TopicListCell = props => {
     return (
 
         <td>
-            <Grid columns={5}>
+            <Grid columns={3}>
                 <Cell width={3}>
                     <div className="left-align blue-text text-darken-2">{props.topic.topicName}</div>
                 </Cell>
-                <Cell width={2}>
+                {/* <Cell width={2}>
                     <div className="left-align blue-text text-darken-2">0</div>
-                </Cell>
+                </Cell> */}
             </Grid>
             
         </td>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import {Grid, Cell} from 'styled-css-grid';
+//import {Grid, Cell} from 'styled-css-grid';
 
 import { deleteWord } from '../../actions/wordActions';
 
@@ -19,8 +19,8 @@ const DeleteButton = styled.div`
  
 const WordsListCell = props => {
     let descriptionText = '';
-    if(props.word.contentOrder !== undefined && props.word.contentOrder.length > 0) {
-        descriptionText = props.word.contentOrder[0].content;
+    if(props.word.shortDescription) {
+        descriptionText = props.word.shortDescription;
         if(descriptionText !== undefined && descriptionText.length > 60) {
             descriptionText = descriptionText.slice(0,60) + '...';
         }
@@ -29,26 +29,25 @@ const WordsListCell = props => {
     return (
 
         <td>
-            <Grid columns={12}>
-                <Cell width={10}>
+            <div className='row'>
+                <div className='col s10'>
                     <div className="left-align blue-text text-darken-2">{props.word.wordName}</div>
                     <div className="left-align grey-text ">{descriptionText}</div>
-                </Cell>
+                </div>
                 {props.deleteMode ? (
-                    <Cell width={2}>
+                    <div className='col s2'>
                         <DeleteButton 
                             style={{cursor: 'pointer'}} 
                             onClick={() => {props.deleteWord(props.word._id)}}
                         >
                             <TrashCanSVG/>
                         </DeleteButton>
-                    </Cell>
+                    </div>
                 ):(
                     <>
                     </>
                 )}
-            </Grid>
-            
+            </div>
         </td>
         
     )
@@ -72,3 +71,24 @@ WordsListCell.propTypes = {
     wordName: PropTypes.string,
     contentOrder: PropTypes.array
 }
+
+
+{/* <Grid columns={12}>
+                <Cell width={10}>
+                    <div className="left-align blue-text text-darken-2">{props.word.wordName}</div>
+                    <div className="left-align grey-text ">{descriptionText}</div>
+                </Cell>
+                {props.deleteMode ? (
+                    <Cell width={2}>
+                        <DeleteButton 
+                            style={{cursor: 'pointer'}} 
+                            onClick={() => {props.deleteWord(props.word._id)}}
+                        >
+                            <TrashCanSVG/>
+                        </DeleteButton>
+                    </Cell>
+                ):(
+                    <>
+                    </>
+                )}
+            </Grid> */}

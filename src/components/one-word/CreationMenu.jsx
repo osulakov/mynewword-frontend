@@ -32,7 +32,7 @@ class CreationMenu extends Component {
                     <a href="#">Tag</a>
                     <a href="#" onClick={() => {this.createNewContentItem('descriptionNote')}}>Description Note</a>
                     <a href="#">URL Link</a>
-                    <a href="#">YouTube Video</a>
+                    <a href="#" onClick={() => {this.createNewContentItem('youtubeVideo')}}>YouTube Video</a>
                     <a href="#">Translation</a>
                     <a href="#">Wiki Info</a>
                     <a href="#">Photo Note</a>

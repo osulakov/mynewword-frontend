@@ -1,24 +1,66 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { deleteContentItem } from '../../actions/wordActions';
+import { deleteContentItem, updateWord } from '../../actions/wordActions';
 
 import '../../css/ContentItems.css';
 
 class SubTitle extends Component {
 
     state = {
-        hover: false
+        hover: false,
+        editMode: false,
+        content: ''
     }
 
-    toggleHover = () => {
-        this.setState({hover: !this.state.hover})
+    toggleHoverIn = () => {
+        this.setState({hover: true})
+    }
+
+    toggleHoverOut = () => {
+        this.setState({hover: false})
     }
 
     deleteItem = () => {
         let word = this.props.word;
         let id = this.props.data.id;
         this.props.deleteContentItem(word, id)
+    }
+
+    toEditMode = () => {
+        this.setState({editMode: true})
+    }
+
+    changeContent = (e) => {
+        this.setState({content: e.target.value})
+    }
+
+    editItemSubmit = () => {
+
+        let item = this.props.data;
+        let word = this.props.word;
+        let contentOrder = word.contentOrder;
+
+        let index = 0;
+        contentOrder.forEach((_item, _index) => {
+            if(_item.id === item.id) {
+                index = _index;
+            }
+        })
+
+        contentOrder = contentOrder.filter((_item) => {
+            return _item.id !== item.id
+        })
+
+        item.content = this.state.content;
+
+        contentOrder.splice(index, 0, item);
+
+        word.contentOrder = contentOrder;
+
+        this.props.updateWord(word);
+        this.setState({editMode: false});
+        this.toggleHoverOut();
     }
 
     render () {
@@ -40,24 +82,38 @@ class SubTitle extends Component {
             color: 'white',
             borderRadius: '2px'
         }
-        return (
-            <div style={containerStyle} onMouseEnter={ this.toggleHover } onMouseLeave={ this.toggleHover }>
-                {this.state.hover ? (
-                    <div>
-                        { data.content }
-                        <button style={buttonStyle}>Edit</button>
-                        <button 
-                            style={buttonStyle} 
-                            onClick={this.deleteItem}
-                        >Delete</button>
-                    </div>
-                ):(
-                    <div>{ data.content }</div>
-                )}
-                
-                
-            </div>
-        )
+
+        if(this.state.editMode) {
+            return (
+                <>
+                <input 
+                    id='subtitle-item-edit-mode-title'
+                    type='text'
+                    onChange={this.changeContent}
+                    value={this.state.content}
+                />
+                <button onClick={this.editItemSubmit}>Save</button>
+                </>
+            )
+        } else {
+            return (
+                <div style={containerStyle} onMouseEnter={ this.toggleHoverIn } onMouseLeave={ this.toggleHoverOut }>
+                    {this.state.hover ? (
+                        <div>
+                            { data.content }
+                            <button style={buttonStyle} onClick={this.toEditMode}>Edit</button>
+                            <button 
+                                style={buttonStyle} 
+                                onClick={this.deleteItem}
+                            >Delete</button>
+                        </div>
+                    ):(
+                        <div>{ data.content }</div>
+                    )} 
+                </div>
+            )
+        }
+        
     }
 }
 
@@ -69,7 +125,8 @@ const MapStateToProps = (state) => {
 
 const MapDispatchToProps = (dispatch) => {
     return {
-        deleteContentItem: (word, id) => dispatch(deleteContentItem(word, id))
+        deleteContentItem: (word, id) => dispatch(deleteContentItem(word, id)),
+        updateWord: (word) => dispatch(updateWord(word))
     }
 }
 

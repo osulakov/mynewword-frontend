@@ -16,6 +16,7 @@ class NewWord extends Component {
         wordName: '',
         topicName: '',
         tag: '',
+        shortDescription: '',
         isPrivate: true,
         didNotEnterWordName: true
     }
@@ -34,6 +35,10 @@ class NewWord extends Component {
 
     handleChangeTag = (e) => {
         this.setState({tag: e.target.value});
+    }
+
+    handleChangeShortDescription = (e) => {
+        this.setState({shortDescription: e.target.value});
     }
 
     handleIsPrivateToggle = () => {
@@ -76,6 +81,7 @@ class NewWord extends Component {
                 wordName: this.state.wordName,
                 topics: topics,
                 tags: tags,
+                shortDescription: this.state.shortDescription,
                 isPrivate: this.state.isPrivate
             };
             
@@ -109,7 +115,6 @@ class NewWord extends Component {
                 border: '1px solid red'
             }
         }
-        console.log('all topics in NewWord', this.props.topics)
         return (
             <div className='create-new-word-container'>
                 <p>Creating a New Word</p>
@@ -160,6 +165,23 @@ class NewWord extends Component {
                             onChange={this.handleChangeTag} 
                             value={this.state.tag} 
                             onKeyDown={this.handlePressEnterTag}
+                        />
+                    </Cell>
+                    <Cell width={1}>&nbsp;</Cell>
+                    <Cell width={1}>&nbsp;</Cell>
+                    <Cell width={10} style={{color: 'grey'}}>
+                        <><b>Short Description</b></>
+                    </Cell>
+                    <Cell width={1}>&nbsp;</Cell>
+                    <Cell width={1}>&nbsp;</Cell>
+                    <Cell width={10}>
+                        <textarea
+                            style={{border: 'none'}}
+                            id='new-word-short-description-input'
+                            type='text'
+                            placeholder='You can type here short description'
+                            onChange={this.handleChangeShortDescription}
+                            value={this.state.shortDescription}
                         />
                     </Cell>
                     <Cell width={1}>&nbsp;</Cell>
